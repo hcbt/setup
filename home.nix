@@ -89,7 +89,7 @@
       addKeysToAgent = "true";
       extraConfig = ''
         UseKeychain yes
-        IdentityFile ~/.ssh/id_ed25519
+        IdentityFile /run/secrets/auth
       '';
     };
 
@@ -100,7 +100,7 @@
       userName = "hcbt";
 
       signing = {
-        key = "~/.ssh/id_ed25519.pub";
+        key = "/run/secrets/git_pub";
         signByDefault = true;
       };
 

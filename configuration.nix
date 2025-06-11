@@ -39,6 +39,47 @@
     };
   };
 
+  sops = {
+    defaultSopsFile = inputs.secrets + "/secrets.yaml";
+    validateSopsFiles = false;
+
+    gnupg = {
+      sshKeyPaths = [ ];
+    };
+
+    age = {
+      keyFile = "/Users/hcbt/.config/sops/age/keys.txt";
+      generateKey = false;
+      sshKeyPaths = [ ];
+    };
+
+    secrets = {
+      auth = {
+        path = "/run/secrets/auth";
+        owner = "hcbt";
+        mode = "0600";
+      };
+
+      auth_pub = {
+        path = "/run/secrets/auth_pub";
+        owner = "hcbt";
+        mode = "0600";
+      };
+
+      git = {
+        path = "/run/secrets/git";
+        owner = "hcbt";
+        mode = "0600";
+      };
+
+      git_pub = {
+        path = "/run/secrets/git_pub";
+        owner = "hcbt";
+        mode = "0600";
+      };
+    };
+  };
+
   programs = {
     nix-index-database = {
       comma = {
