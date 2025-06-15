@@ -55,27 +55,33 @@
 
     secrets = {
       auth = {
-        path = "/run/secrets/auth";
+        path = "/Users/hcbt/.ssh/id_rsa";
         owner = "hcbt";
         mode = "0600";
       };
 
       auth_pub = {
-        path = "/run/secrets/auth_pub";
+        path = "/Users/hcbt/.ssh/id_rsa.pub";
         owner = "hcbt";
-        mode = "0600";
+        mode = "0640";
       };
 
       git = {
-        path = "/run/secrets/git";
+        path = "/Users/hcbt/.ssh/id_ed25519";
         owner = "hcbt";
         mode = "0600";
       };
 
       git_pub = {
-        path = "/run/secrets/git_pub";
+        path = "/Users/hcbt/.ssh/id_ed25519.pub";
         owner = "hcbt";
-        mode = "0600";
+        mode = "0640";
+      };
+
+      allowed_signers = {
+        path = "/Users/hcbt/.ssh/allowed_signers";
+        owner = "hcbt";
+        mode = "0640";
       };
     };
   };

@@ -1,4 +1,7 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  ...
+}:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -93,24 +96,32 @@
       '';
     };
 
+    gpg = {
+      enable = true;
+    };
+
     git = {
       enable = true;
 
-      userEmail = "git@hcbt.xyz";
-      userName = "hcbt";
-
       signing = {
-        key = "/run/secrets/git_pub";
+        format = "ssh";
+        key = "~/.ssh/id_ed25519.pub";
         signByDefault = true;
       };
+
+      userEmail = "git@hcbt.xyz";
+      userName = "hcbt";
 
       extraConfig = {
         credential.helper =
           if pkgs.stdenvNoCC.isDarwin then "osxkeychain" else "cache --timeout=1000000000";
 
         init.defaultBranch = "master";
+
         commit.gpgsign = true;
         gpg.format = "ssh";
+        user.signingkey = "~/.ssh/id_ed25519.pub";
+        gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
       };
 
       ignores = [
@@ -133,11 +144,5 @@
         ".apdisk"
       ];
     };
-
-    # vscode = {
-    #   enable = false;
-    #   package = pkgs.code-cursor;
-    #   mutableExtensionsDir = true;
-    # };
   };
 }
