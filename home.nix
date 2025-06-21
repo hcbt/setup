@@ -92,7 +92,7 @@
       addKeysToAgent = "true";
       extraConfig = ''
         UseKeychain yes
-        IdentityFile /run/secrets/auth
+        IdentityFile /Users/hcbt/.ssh/id_ed25519
       '';
     };
 

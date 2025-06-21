@@ -54,18 +54,6 @@
     };
 
     secrets = {
-      auth = {
-        path = "/Users/hcbt/.ssh/id_rsa";
-        owner = "hcbt";
-        mode = "0600";
-      };
-
-      auth_pub = {
-        path = "/Users/hcbt/.ssh/id_rsa.pub";
-        owner = "hcbt";
-        mode = "0640";
-      };
-
       git = {
         path = "/Users/hcbt/.ssh/id_ed25519";
         owner = "hcbt";
@@ -108,6 +96,8 @@
     };
 
     systemPackages = with pkgs; [
+      cf-terraforming
+      docker
       sops
       ssh-to-age
       ssh-to-pgp

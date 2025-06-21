@@ -125,6 +125,7 @@
       "runelite"
 
       "ibkr"
+      "trader-workstation"
     ];
 
     masApps = {
