@@ -59,7 +59,7 @@
       "keepingyouawake"
       "orbstack"
       "keepassxc"
-      "nvidia-geforce-now"
+      #"nvidia-geforce-now"
       "mos"
       "betterdisplay"
       "steam"
@@ -107,7 +107,7 @@
       #"native-access"
       #"ilok-license-manager"
       #"softube-central"
-      #"rekordbox"
+      "rekordbox"
 
       "oversight"
       "blockblock"
@@ -118,7 +118,7 @@
       "knockknock"
       "lulu"
 
-      "eloston-chromium"
+      #"eloston-chromium"
       "firefox"
 
       "jagex"
