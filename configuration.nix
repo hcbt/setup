@@ -2,7 +2,7 @@
   self,
   pkgs,
   inputs,
-  nix-index-database,
+  config,
   ...
 }:
 
@@ -71,6 +71,16 @@
         owner = "hcbt";
         mode = "0640";
       };
+
+      cloudflare_email = {
+        owner = "hcbt";
+        mode = "0640";
+      };
+
+      cloudflare_key = {
+        owner = "hcbt";
+        mode = "0640";
+      };
     };
   };
 
@@ -93,10 +103,16 @@
     variables = {
       EDITOR = "micro";
       VISUAL = "cursor";
+      CLOUDFLARE_EMAIL = "$(cat ${config.sops.secrets.cloudflare_email.path})";
+      CLOUDFLARE_API_KEY = "$(cat ${config.sops.secrets.cloudflare_key.path})";
+      GOPATH = "/Users/hcbt/go";
+      GOBIN = "/Users/hcbt/go/bin";
+      PATH = "$PATH:/Users/hcbt/go/bin";
     };
 
     systemPackages = with pkgs; [
-      cf-terraforming
+      #cf-terraforming
+      terraform
       docker
       sops
       ssh-to-age
