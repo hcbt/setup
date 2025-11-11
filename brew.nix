@@ -34,16 +34,18 @@
   homebrew = {
     enable = true;
     onActivation.autoUpdate = true;
-    onActivation.cleanup = "zap";
+    #onActivation.cleanup = "zap";
     onActivation.upgrade = true;
 
     # https://github.com/zhaofengli/nix-homebrew/issues/5#issuecomment-1878798641
     taps = builtins.attrNames config.nix-homebrew.taps;
 
-    brews = [ ];
+    # brews = [
+    #   "nicotine-plus"
+    # ];
 
     casks = [
-      #"logi-options+"
+      "logi-options+"
       #"zerotier-one"
       #"inkscape"
       #"balenaetcher"
@@ -53,26 +55,29 @@
       #"cutter"
       "utm"
       "gitkraken"
-      "gitbutler"
+      #"gitbutler"
       #"zenmap"
-      "tailscale"
+
+      "tailscale-app"
       "keepingyouawake"
       "orbstack"
-      "keepassxc"
-      #"nvidia-geforce-now"
-      "mos"
+      #"keepassxc"
+      "nvidia-geforce-now"
+      #"mos"
       "betterdisplay"
       "steam"
       "appcleaner"
       "discord"
+      "messenger"
+      "telegram"
       "element"
       "fujifilm-x-raw-studio"
       "grandperspective"
       "hammerspoon"
-      "jordanbaird-ice"
+      #"jordanbaird-ice"
       "iterm2"
       "keka"
-      "obs"
+      #"obs"
       "qbittorrent"
       "sloth"
       "stats"
@@ -87,22 +92,22 @@
       "readwise-ibooks"
       "reader"
       "zotero"
-      "standard-notes"
+      #"standard-notes"
       #"chatgpt"
-      "lm-studio"
-      "livebook"
+      #"lm-studio"
+      #"livebook"
       #"reflect"
       #"heptabase"
 
-      "handbrake"
+      "handbrake-app"
       "eqmac"
       "iina"
-      "tidal"
+      #"tidal"
       "foobar2000"
       "splice"
       "soulseek"
       "spotify"
-      #"xld"
+      "xld"
       #"musicbrainz-picard"
       #"native-access"
       #"ilok-license-manager"
@@ -118,25 +123,26 @@
       "knockknock"
       "lulu"
 
-      #"eloston-chromium"
+      "ungoogled-chromium"
       "firefox"
 
-      "jagex"
-      "runelite"
-
       "ibkr"
-      "trader-workstation"
+      #"trader-workstation"
+
+      #"runescape"
+      #"jagex"
+      #"runelite"
     ];
 
-    masApps = {
-      #"grabit" = 450166997;
-      "macfamilytree" = 6480510488;
-      "keynote" = 409183694;
-      "pages" = 409201541;
-      "xcode" = 497799835;
-      "blackmagicdiskmark" = 425264550;
-      "perplexity" = 6714467650;
-      "configurator" = 1037126344;
-    };
+    # masApps = {
+    #   "grabit" = 450166997;
+    #   "macfamilytree" = 6480510488;
+    #   "keynote" = 409183694;
+    #   "pages" = 409201541;
+    #   "xcode" = 497799835;
+    #   "blackmagicdiskmark" = 425264550;
+    #   "perplexity" = 6714467650;
+    #   "configurator" = 1037126344;
+    # };
   };
 }
