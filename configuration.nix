@@ -111,8 +111,9 @@
     };
 
     systemPackages = with pkgs; [
-      #cf-terraforming
+      cf-terraforming
       terraform
+      kubectl
       docker
       sops
       ssh-to-age
