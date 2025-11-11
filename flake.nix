@@ -29,11 +29,6 @@
       flake = false;
     };
 
-    nix-index-database = {
-      url = "github:nix-community/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -66,11 +61,10 @@
       darwinConfigurations = {
         "kvarcas" = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
-          specialArgs = { inherit self inputs nix-index-database; };
+          specialArgs = { inherit self inputs; };
           modules = [
             ./configuration.nix
             ./brew.nix
-            nix-index-database.darwinModules.nix-index
             home-manager.darwinModules.home-manager
             sops-nix.darwinModules.sops
             {
