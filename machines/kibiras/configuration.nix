@@ -3,6 +3,8 @@
   pkgs,
   inputs,
   config,
+  user,
+  hostname,
   ...
 }:
 
@@ -14,7 +16,7 @@
       experimental-features = "nix-command flakes";
       trusted-users = [
         "root"
-        "hcbt"
+        "${user}"
       ];
     };
   };
@@ -33,9 +35,9 @@
   # https://github.com/nix-community/home-manager/issues/6036
   # https://stackoverflow.com/questions/79473295/error-trying-to-setup-basic-nix-darwin-with-home-manager-flake
   users = {
-    users.hcbt = {
-      name = "hcbt";
-      home = "/Users/hcbt";
+    users.${user} = {
+      name = user;
+      home = "/Users/${user}";
     };
   };
 
@@ -48,37 +50,37 @@
     };
 
     age = {
-      keyFile = "/Users/hcbt/.config/sops/age/keys.txt";
+      keyFile = "/Users/${user}/.config/sops/age/keys.txt";
       generateKey = false;
       sshKeyPaths = [ ];
     };
 
     secrets = {
       git = {
-        path = "/Users/hcbt/.ssh/id_ed25519";
-        owner = "hcbt";
+        path = "/Users/${user}/.ssh/id_ed25519";
+        owner = "${user}";
         mode = "0600";
       };
 
       git_pub = {
-        path = "/Users/hcbt/.ssh/id_ed25519.pub";
-        owner = "hcbt";
+        path = "/Users/${user}/.ssh/id_ed25519.pub";
+        owner = "${user}";
         mode = "0640";
       };
 
       allowed_signers = {
-        path = "/Users/hcbt/.ssh/allowed_signers";
-        owner = "hcbt";
+        path = "/Users/${user}/.ssh/allowed_signers";
+        owner = "${user}";
         mode = "0640";
       };
 
       cloudflare_email = {
-        owner = "hcbt";
+        owner = "${user}";
         mode = "0640";
       };
 
       cloudflare_key = {
-        owner = "hcbt";
+        owner = "${user}";
         mode = "0640";
       };
     };
@@ -99,12 +101,13 @@
       VISUAL = "cursor";
       CLOUDFLARE_EMAIL = "$(cat ${config.sops.secrets.cloudflare_email.path})";
       CLOUDFLARE_API_KEY = "$(cat ${config.sops.secrets.cloudflare_key.path})";
-      GOPATH = "/Users/hcbt/go";
-      GOBIN = "/Users/hcbt/go/bin";
-      PATH = "$PATH:/Users/hcbt/go/bin";
+      GOPATH = "/Users/${user}/go";
+      GOBIN = "/Users/${user}/go/bin";
+      PATH = "$PATH:/Users/${user}/go/bin";
     };
 
     systemPackages = with pkgs; [
+      lazygit
       cf-terraforming
       terraform
       kubectl
@@ -125,14 +128,12 @@
       htop
       wget
       curl
-      zulu17
       ffmpeg
     ];
   };
 
   networking = {
-    #computerName = "${config.home.username}";
-    computerName = "kvarcas";
+    computerName = hostname;
   };
 
   system = {
@@ -156,7 +157,7 @@
     # functionality it is relevant for has been adjusted to allow
     # specifying the relevant user separately, moved under the
     # `users.users.*` namespace, or migrated to Home Manager.
-    primaryUser = "hcbt";
+    primaryUser = user;
   };
 
   services = {

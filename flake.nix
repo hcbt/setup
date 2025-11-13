@@ -50,30 +50,60 @@
       homebrew-core,
       homebrew-cask,
       homebrew-bundle,
-      nix-index-database,
       sops-nix,
       secrets,
       ...
     }:
+    let
+      user = "hcbt";
+    in
     {
       # Build darwin flake using:
       # $ darwin-rebuild build --flake .#kvarcas
       darwinConfigurations = {
         "kvarcas" = nix-darwin.lib.darwinSystem {
           system = "aarch64-darwin";
-          specialArgs = { inherit self inputs; };
+          specialArgs = {
+            inherit self inputs user;
+            hostname = "kvarcas";
+          };
           modules = [
-            ./configuration.nix
-            ./brew.nix
-            home-manager.darwinModules.home-manager
+            ./machines/kvarcas/configuration.nix
+            ./machines/kvarcas/brew.nix
             sops-nix.darwinModules.sops
+            home-manager.darwinModules.home-manager
             {
-              home-manager.extraSpecialArgs = { inherit self inputs; };
+              home-manager.extraSpecialArgs = { inherit self inputs user; };
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.hcbt = ./home.nix;
+              home-manager.users."${user}" = ./machines/kvarcas/home.nix;
             }
           ];
+        };
+        "kibiras" = nix-darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          specialArgs = {
+            inherit self inputs user;
+            hostname = "kibiras";
+          };
+          modules = [
+            ./machines/kibiras/configuration.nix
+            ./machines/kibiras/brew.nix
+            sops-nix.darwinModules.sops
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.extraSpecialArgs = { inherit self inputs user; };
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users."${user}" = ./machines/kibiras/home.nix;
+            }
+          ];
+        };
+      };
+      nixosConfigurations = {
+        "stakles" = nixpkgs.lib.nixosSystem {
+          system = "aarch64-linux";
+          modules = [ ./configuration.nix ];
         };
       };
     };

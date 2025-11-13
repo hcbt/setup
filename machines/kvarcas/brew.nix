@@ -1,6 +1,7 @@
 {
   inputs,
   config,
+  user,
   ...
 }:
 
@@ -17,7 +18,7 @@
     enableRosetta = false;
 
     # User owning the Homebrew prefix
-    user = "hcbt";
+    user = "${user}";
 
     # Declarative tap management
     taps = {
@@ -92,7 +93,6 @@
       "readwise-ibooks"
       "reader"
       "zotero"
-      #"standard-notes"
       #"chatgpt"
       #"lm-studio"
       #"livebook"

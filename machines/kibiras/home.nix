@@ -1,13 +1,14 @@
 {
   pkgs,
+  user,
   ...
 }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "hcbt";
-  home.homeDirectory = "/Users/hcbt";
+  home.username = user;
+  home.homeDirectory = "/Users/${user}";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -89,10 +90,11 @@
 
     ssh = {
       enable = true;
-      addKeysToAgent = "true";
+      #addKeysToAgent = "true";
+      #enableDefaultConfig = "false";
       extraConfig = ''
         UseKeychain yes
-        IdentityFile /Users/hcbt/.ssh/id_ed25519
+        IdentityFile /Users/${user}/.ssh/id_ed25519
       '';
     };
 
@@ -109,10 +111,12 @@
         signByDefault = true;
       };
 
-      userEmail = "git@hcbt.xyz";
-      userName = "hcbt";
+      settings = {
+        user = {
+          email = "git@hcbt.xyz";
+          name = "hcbt";
+        };
 
-      extraConfig = {
         credential.helper =
           if pkgs.stdenvNoCC.isDarwin then "osxkeychain" else "cache --timeout=1000000000";
 
@@ -147,8 +151,10 @@
 
     go = {
       enable = true;
-      goPath = "go";
-      goBin = "go/bin";
+      env = {
+        GOBIN = "go/bin";
+        GOPATH = "go";
+      };
     };
   };
 }
