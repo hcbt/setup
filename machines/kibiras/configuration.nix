@@ -58,29 +58,29 @@
     secrets = {
       git = {
         path = "/Users/${user}/.ssh/id_ed25519";
-        owner = "${user}";
+        owner = user;
         mode = "0600";
       };
 
       git_pub = {
         path = "/Users/${user}/.ssh/id_ed25519.pub";
-        owner = "${user}";
+        owner = user;
         mode = "0640";
       };
 
       allowed_signers = {
         path = "/Users/${user}/.ssh/allowed_signers";
-        owner = "${user}";
+        owner = user;
         mode = "0640";
       };
 
       cloudflare_email = {
-        owner = "${user}";
+        owner = user;
         mode = "0640";
       };
 
       cloudflare_key = {
-        owner = "${user}";
+        owner = user;
         mode = "0640";
       };
     };
