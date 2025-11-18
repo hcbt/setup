@@ -86,13 +86,6 @@
     };
   };
 
-  programs = {
-    direnv = {
-      enable = true;
-      nix-direnv.enable = true;
-    };
-  };
-
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   environment = {
@@ -107,9 +100,6 @@
     };
 
     systemPackages = with pkgs; [
-      lazygit
-      cf-terraforming
-      terraform
       kubectl
       docker
       sops
