@@ -170,7 +170,7 @@
 
   services = {
     openssh = {
-      enable = false;
+      enable = true;
     };
   };
 
