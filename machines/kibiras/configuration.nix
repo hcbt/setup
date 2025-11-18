@@ -57,19 +57,25 @@
 
     secrets = {
       git = {
-        path = "/Users/${user}/.ssh/id_ed25519";
+        path = "/Users/${user}/.ssh/git_key";
         owner = user;
         mode = "0600";
       };
 
       git_pub = {
-        path = "/Users/${user}/.ssh/id_ed25519.pub";
+        path = "/Users/${user}/.ssh/git_key.pub";
         owner = user;
         mode = "0640";
       };
 
-      allowed_signers = {
-        path = "/Users/${user}/.ssh/allowed_signers";
+      kibiras = {
+        path = "/Users/${user}/.ssh/id_ed25519";
+        owner = user;
+        mode = "0600";
+      };
+
+      kibiras_pub = {
+        path = "/Users/${user}/.ssh/id_ed25519.pub";
         owner = user;
         mode = "0640";
       };
@@ -78,6 +84,12 @@
         path = "/Users/${user}/.ssh/authorized_keys";
         owner = user;
         mode = "0600";
+      };
+
+      allowed_signers = {
+        path = "/Users/${user}/.ssh/allowed_signers";
+        owner = user;
+        mode = "0640";
       };
 
       cloudflare_email = {
@@ -158,7 +170,7 @@
 
   services = {
     openssh = {
-      enable = true;
+      enable = false;
     };
   };
 
