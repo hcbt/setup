@@ -74,6 +74,12 @@
         mode = "0640";
       };
 
+      authorized_keys = {
+        path = "/Users/${user}/.ssh/authorized_keys";
+        owner = user;
+        mode = "0600";
+      };
+
       cloudflare_email = {
         owner = user;
         mode = "0640";
@@ -152,7 +158,7 @@
 
   services = {
     openssh = {
-      enable = false;
+      enable = true;
     };
   };
 
