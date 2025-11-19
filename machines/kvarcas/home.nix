@@ -90,7 +90,6 @@
 
     ssh = {
       enable = true;
-      package = pkgs.openssh;
       #addKeysToAgent = "true";
       #enableDefaultConfig = "false";
       extraConfig = ''
